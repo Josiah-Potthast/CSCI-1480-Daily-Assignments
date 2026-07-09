@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassDice.cpp" />
+    <ClCompile Include="DiceConsole.cpp" />
     <ClCompile Include="DiceHand.cpp" />
     <ClCompile Include="Die.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DiceConsole.h" />
     <ClInclude Include="DiceHand.h" />
     <ClInclude Include="Die.h" />
   </ItemGroup>

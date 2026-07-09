@@ -1,9 +1,14 @@
 #include "DiceHand.h"
 
-DiceHand::DiceHand(int s)
+DiceHand::DiceHand(int size) : DiceHand(dice, size)
+{
+
+}
+
+DiceHand::DiceHand(Die* d, int s)
 {
 	handSize = s;
-	dice = new Die[handSize];
+	dice = new Die[s];
 }
 
 DiceHand::~DiceHand()
@@ -28,24 +33,19 @@ void DiceHand::setHandSize(int s)
 		handSize = s;
 }
 
-void DiceHand::setDie(Die d, int dieNum)
-{
-	dice[dieNum - 1] = d;
-}
-
-string DiceHand::displayDieHand()
-{
-	string handDescription;
-	for (int i = 0; i < handSize - 1; i++)
-	{
-		handDescription += dice[i].dieDescription() += ", ";
-	}
-
-	handDescription += "and ";
-	handDescription += dice[handSize - 1].dieDescription();
-
-	return handDescription;
-}
+//string DiceHand::displayDieHand()
+//{
+//	string handDescription;
+//	for (int i = 0; i < handSize - 1; i++)
+//	{
+//		handDescription += dice[i].dieDescription() += ", ";
+//	}
+//
+//	handDescription += "and ";
+//	handDescription += dice[handSize - 1].dieDescription();
+//
+//	return handDescription;
+//}
 
 void DiceHand::rollDie(int dieNum)
 {

@@ -5,15 +5,15 @@ class DiceHand
 {
 private:
 	int handSize;
-	Die* dice = nullptr;
+	Die* dice;
 public:
 	DiceHand(int s = 5);
+	DiceHand(Die* d, int s);
 	~DiceHand();
 	int getHandSize() const;
-	Die* getDie(int dieNum) const;
+	Die* getDie(int dieNum = 1) const;
 	void setHandSize(int s);
-	void setDie(Die d, int dieNum);
-	string displayDieHand();
+	//string displayDieHand();
 	void rollDie(int dieNum);
 	void rollAllDice();
 };

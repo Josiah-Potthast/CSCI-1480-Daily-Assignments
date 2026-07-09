@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Die.h"
 #include "DiceHand.h"
+#include "DiceConsole.h"
 using namespace std;
 
 const int DICE = 3;
@@ -12,34 +13,41 @@ const int STARTING_SIDE = 1;
 
 int main()
 {
-	// Declare the array of dice
-	// Die dice[DICE];
+	const int HAND_SIZE = 2;
 
-	// Set the state of the dice
-	/*for (int i = 0; i < DICE; i++)
+	DiceHand hand(HAND_SIZE);
+
+	DiceConsole console;
+
+	cout << "Here are your dice:\n\n";
+
+	console.displayDice(hand.getDie(), HAND_SIZE);
+
+	bool done = false;
+	int rollNum = 1;
+	do
 	{
-		dice[i].setNumberOfSides(SIDES);
-		dice[i].setFaceValue(STARTING_SIDE);
-	}*/
+		cout << "You have rolled the dice " << rollNum << " time";
+		if (rollNum != 1)
+			cout << "s";
+		
+		cout << "\nWould you like to re-roll or stay?\n";
 
-	// Roll the dice
-	/*for (int i = 0; i < DICE; i++)
-	{
-		dice[i].roll();
-	}*/
-
-	DiceHand hand;
-
-	cout << "You have " << hand.displayDieHand() << endl;
-	cout << "Rolling all dice... " << endl;
-
-	hand.rollAllDice();
-
-	cout << "Now you have " << hand.displayDieHand() << endl;
-	cout << "Rolling the first and last dice... " << endl;
-
-	hand.rollDie(1);
-	hand.rollDie(hand.getHandSize());
-
-	cout << "Now you have " << hand.displayDieHand() << endl;
+		switch (console.getUserChoice("1. Re-roll\n2. Stay\n"))
+		{
+		case 1:
+			hand.rollAllDice();
+			rollNum++;
+			cout << "\nHere are your new dice:\n\n";
+			console.displayDice(hand.getDie(), HAND_SIZE);
+			break;
+		case 2:
+			cout << "\nHere was your final roll:\n\n";
+			console.displayDice(hand.getDie(), HAND_SIZE);
+			done = true;
+			break;
+		default:
+			cout << "That is not a valid choice, please enter 1 or 2\n";
+		}
+	} while (!done);
 }

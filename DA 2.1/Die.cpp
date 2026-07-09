@@ -3,10 +3,9 @@
 #include <string>
 using namespace std;
 
-Die::Die(int n, int v)
+Die::Die(int sides) : numberOfSides(sides)
 {
-	numberOfSides = n;
-	faceValue = v;
+	roll();
 }
 
 int Die::getNumberOfSides() const
@@ -17,12 +16,6 @@ int Die::getNumberOfSides() const
 int Die::getFaceValue() const
 {
 	return faceValue;
-}
-
-void Die::setNumberOfSides(int sides)
-{
-	if (sides > 0)
-		numberOfSides = sides;
 }
 
 void Die::setFaceValue(int value)
@@ -43,7 +36,7 @@ void Die::roll()
 	faceValue = rand() % numberOfSides + 1;
 }
 
-string Die::dieDescription()
-{
-	return "a " + to_string(faceValue);
-}
+//string Die::dieDescription()
+//{
+//	return "a " + to_string(faceValue); 
+//}
