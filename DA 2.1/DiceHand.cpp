@@ -1,5 +1,17 @@
 #include "DiceHand.h"
 
+DiceHand::DiceHand(int s)
+{
+	handSize = s;
+	dice = new Die[handSize];
+}
+
+DiceHand::~DiceHand()
+{
+	delete[] dice;
+	dice = nullptr;
+}
+
 int DiceHand::getHandSize() const
 {
 	return handSize;

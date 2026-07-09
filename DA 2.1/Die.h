@@ -5,9 +5,10 @@ using namespace std;
 class Die
 {
 private:
-	int numberOfSides = 6;
-	int faceValue = 1;
+	int numberOfSides;
+	int faceValue;
 public:
+	Die(int n = 6, int v = 1);
 	int getNumberOfSides() const;
 	int getFaceValue() const;
 	void setNumberOfSides(int sides);

@@ -3,6 +3,12 @@
 #include <string>
 using namespace std;
 
+Die::Die(int n, int v)
+{
+	numberOfSides = n;
+	faceValue = v;
+}
+
 int Die::getNumberOfSides() const
 {
 	return numberOfSides;

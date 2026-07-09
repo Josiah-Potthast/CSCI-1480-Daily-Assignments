@@ -4,9 +4,11 @@
 class DiceHand
 {
 private:
-	int handSize = 5;
-	Die* dice = new Die[handSize];
+	int handSize;
+	Die* dice = nullptr;
 public:
+	DiceHand(int s = 5);
+	~DiceHand();
 	int getHandSize() const;
 	Die* getDie(int dieNum) const;
 	void setHandSize(int s);
