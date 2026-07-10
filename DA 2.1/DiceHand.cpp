@@ -1,6 +1,6 @@
 #include "DiceHand.h"
 
-DiceHand::DiceHand(int size) : DiceHand(dice, size)
+DiceHand::DiceHand(int size) : DiceHand(new Die[size], size)
 {
 
 }
@@ -8,7 +8,7 @@ DiceHand::DiceHand(int size) : DiceHand(dice, size)
 DiceHand::DiceHand(Die* d, int s)
 {
 	handSize = s;
-	dice = new Die[s];
+	dice = d;
 }
 
 DiceHand::~DiceHand()
