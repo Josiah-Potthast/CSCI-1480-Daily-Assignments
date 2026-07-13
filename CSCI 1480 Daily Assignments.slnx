@@ -4,4 +4,5 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="DA 2.1/DA 2.1.vcxproj" Id="72043cfb-5b12-4686-bde2-a3eec3560083" />
+  <Project Path="DA 2.4/DA 2.4.vcxproj" Id="7c8ec4db-071f-4d22-9350-9708e7a15e2e" />
 </Solution>
