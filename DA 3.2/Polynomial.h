@@ -12,26 +12,32 @@ private:
 	Term* terms;
 	int numberOfTerms;
 public:
+	// constructors
 	Polynomial();
 	Polynomial(Term* termArray, int size);
 	Polynomial(const Polynomial& obj);
 	~Polynomial();
 
+	// accessors
 	Term* getTerms() const;
 	int getNumberOfTerms() const;
 	Term getTerm(int index) const;
 
+	// mutators
 	void setTerms(Term* newTerms, int size);
 	void setTerm(int index, Term newTerm);
 
+	// helper functions
 	void addTerm(Term term); // working
 	void removeTerm(int index); // working
 	void swapTerms(int firstIndex, int secondIndex); // working
 	void simplify(); // working
 	void sort(); // working
 
+	// polynomial-to-term conversion
 	operator Term();
 
+	// overloaded operator functions
 	Polynomial operator+(const Polynomial& right) const; // working
 	Polynomial operator-(const Polynomial& right) const; // working
 	Polynomial operator*(const Polynomial& right) const; // working

@@ -60,6 +60,7 @@ void Polynomial::setTerm(int index, Term newTerm)
 	terms[index] = newTerm;
 }
 
+// adds the term passed in to the end of the terms dynamic array
 void Polynomial::addTerm(Term term)
 {
 	numberOfTerms++;
@@ -72,6 +73,8 @@ void Polynomial::addTerm(Term term)
 	tempTerms = nullptr;
 }
 
+// replaces the unwanted value with the last value in the array, then re-allocates
+// it to be one size smaller
 void Polynomial::removeTerm(int index)
 {
 	numberOfTerms--;
@@ -84,6 +87,7 @@ void Polynomial::removeTerm(int index)
 	tempTerms = nullptr;
 }
 
+// exchanges the values of two elements in the terms array
 void Polynomial::swapTerms(int firstIndex, int secondIndex)
 {
 	Term temp = terms[firstIndex];
@@ -91,6 +95,8 @@ void Polynomial::swapTerms(int firstIndex, int secondIndex)
 	terms[secondIndex] = temp;
 }
 
+// combines like terms (same exponent) and removes terms with a zero coefficient,
+// then sorts the terms
 void Polynomial::simplify()
 {
 	for (int i = 0; i < numberOfTerms; i++)
@@ -110,12 +116,13 @@ void Polynomial::simplify()
 		if (terms[i].getCoefficient() == 0)
 		{
 			this->removeTerm(i);
-			i--;
+			i--; 
 		}
 	}
 	this->sort();
 }
 
+// sorts terms from highest power to lowest
 void Polynomial::sort()
 {
 	bool sorted = true;
@@ -208,13 +215,17 @@ bool Polynomial::operator==(const Polynomial& right) const
 
 ostream& operator<<(ostream& strm, const Polynomial& right)
 {
-	for (int i = 0; i < right.numberOfTerms; i++)
+	Polynomial copy(right);
+	for (int i = 0; i < copy.numberOfTerms; i++)
 	{
-		if (i > 0 && right.terms[i].getCoefficient() > 0)
+		if (i > 0 && copy.terms[i].getCoefficient() > 0)
 			strm << " + ";
-		else if (right.terms[i].getCoefficient() < 0)
+		else if (copy.terms[i].getCoefficient() < 0)
+		{
+			copy.terms[i].setCoefficient(copy.terms[i].getCoefficient() * -1);
 			strm << " - ";
-		strm << right.terms[i];
+		}
+		strm << copy.terms[i];
 	}
 	return strm;
 }

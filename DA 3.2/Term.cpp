@@ -55,7 +55,7 @@ Term::operator Polynomial()
 	copy.coefficient = coefficient;
 	copy.variable = variable;
 	copy.exponent = exponent;
-	Polynomial poly(&copy, 1);
+	Polynomial poly(&copy, 1); // converts to a one-term polynomial
 	return poly;
 }
 
@@ -141,7 +141,7 @@ bool Term::operator==(const Term& right) const
 
 ostream& operator<<(ostream& strm, const Term& right)
 {
-	strm << abs(right.coefficient);
+	strm << right.coefficient;
 	if (right.exponent != 0 && right.exponent != 1)
 		strm << right.variable << '^' << right.exponent;
 	else if (right.exponent != 0)
