@@ -80,6 +80,7 @@ Polynomial Term::operator+(const Term& right) const
 	delete terms;
 	terms = nullptr;
 
+	result.simplify();
 	return result;
 }
 
@@ -107,6 +108,7 @@ Polynomial Term::operator-(const Term& right) const
 	delete terms;
 	terms = nullptr;
 
+	result.simplify();
 	return result;
 }
 
@@ -141,7 +143,8 @@ bool Term::operator==(const Term& right) const
 
 ostream& operator<<(ostream& strm, const Term& right)
 {
-	strm << right.coefficient;
+	if (right.coefficient != 1)
+		strm << right.coefficient;
 	if (right.exponent != 0 && right.exponent != 1)
 		strm << right.variable << '^' << right.exponent;
 	else if (right.exponent != 0)

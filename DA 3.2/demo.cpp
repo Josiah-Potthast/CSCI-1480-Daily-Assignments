@@ -6,11 +6,38 @@
 #include <iostream>
 using namespace std;
 
+void termDriver();
 void polyDriver();
 
 int main()
 {
+	termDriver();
 	polyDriver();
+}
+
+void termDriver()
+{
+	Term term(3, 'x', 1);
+	Term otherTerm(1, 'x', 3);
+	cout << "term: " << term << endl;
+	cout << "otherTerm: " << otherTerm << endl;
+	cout << "Term Addition: " << term + otherTerm << endl;
+	cout << "Term Subtraction: " << term - otherTerm << endl;
+	cout << "Term Multiplication: " << term * otherTerm << endl;
+
+	if (term == otherTerm)
+		cout << term << " is equal to " << otherTerm << endl;
+	else
+		cout << term << " is not equal to " << otherTerm << endl;
+
+	otherTerm = term;
+
+	if (term == otherTerm)
+		cout << term << " is equal to " << otherTerm << endl;
+	else
+		cout << term << " is not equal to " << otherTerm << endl;
+
+	cout << endl;
 }
 
 void polyDriver()
@@ -38,4 +65,13 @@ void polyDriver()
 		cout << poly << " is equal to " << otherPoly << endl;
 	else
 		cout << poly << " is not equal to " << otherPoly << endl;
+
+	otherPoly = poly;
+
+	if (poly == otherPoly)
+		cout << poly << " is equal to " << otherPoly << endl;
+	else
+		cout << poly << " is not equal to " << otherPoly << endl;
+
+	cout << endl;
 }
