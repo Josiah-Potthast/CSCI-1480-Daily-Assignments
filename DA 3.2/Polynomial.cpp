@@ -60,27 +60,161 @@ void Polynomial::setTerm(int index, Term newTerm)
 	terms[index] = newTerm;
 }
 
-Polynomial Polynomial::operator+(const Polynomial& right)
+void Polynomial::addTerm(Term term)
 {
-
+	numberOfTerms++;
+	Term* tempTerms = new Term[numberOfTerms];
+	for (int i = 0; i < numberOfTerms - 1; i++)
+		tempTerms[i] = terms[i];
+	tempTerms[numberOfTerms - 1] = term;
+	delete[] terms;
+	terms = tempTerms;
+	tempTerms = nullptr;
 }
 
-Polynomial Polynomial::operator-(const Polynomial& right)
+void Polynomial::removeTerm(int index)
 {
-
+	numberOfTerms--;
+	terms[index] = terms[numberOfTerms]; 
+	Term* tempTerms = new Term[numberOfTerms];
+	for (int i = 0; i < numberOfTerms; i++)
+		tempTerms[i] = terms[i];
+	delete[] terms;
+	terms = tempTerms;
+	tempTerms = nullptr;
 }
 
-Polynomial Polynomial::operator*(const Polynomial& right)
+void Polynomial::swapTerms(int firstIndex, int secondIndex)
 {
-
+	Term temp = terms[firstIndex];
+	terms[firstIndex] = terms[secondIndex];
+	terms[secondIndex] = temp;
 }
 
-bool Polynomial::operator==(const Polynomial& right)
+void Polynomial::simplify()
 {
+	for (int i = 0; i < numberOfTerms; i++)
+	{
+		for (int j = i + 1; j < numberOfTerms; j++)
+		{
+			if (terms[i].getExponent() == terms[j].getExponent())
+			{
+				terms[i] = terms[i] + terms[j];
+				this->removeTerm(j);
+				j--; // because sub j will now be a different term, see removeTerm()
+			}
+		}
+	}
+	for (int i = 0; i < numberOfTerms; i++)
+	{
+		if (terms[i].getCoefficient() == 0)
+		{
+			this->removeTerm(i);
+			i--;
+		}
+	}
+	this->sort();
+}
 
+void Polynomial::sort()
+{
+	bool sorted = true;
+	do
+	{
+		sorted = true;
+		for (int i = 0; i < numberOfTerms - 1; i++)
+		{
+			if (terms[i].getExponent() < terms[i + 1].getExponent())
+			{
+				this->swapTerms(i, i + 1);
+				sorted = false;
+			}
+		}
+	} while (!sorted);
+}
+
+Polynomial::operator Term()
+{
+	if (numberOfTerms == 1)
+		return *terms;
+}
+
+Polynomial Polynomial::operator+(const Polynomial& right) const
+{
+	Polynomial resultPoly(*this);
+	for (int i = 0; i < right.numberOfTerms; i++)
+		resultPoly.addTerm(right.terms[i]);
+	
+	resultPoly.simplify();
+	return resultPoly;
+}
+
+Polynomial Polynomial::operator-(const Polynomial& right) const
+{
+	Polynomial resultPoly(*this);
+	Polynomial tempPoly = right;
+
+	for (int i = 0; i < tempPoly.numberOfTerms; i++)
+	{
+		tempPoly.terms[i].setCoefficient(tempPoly.terms[i].getCoefficient() * -1);
+		resultPoly.addTerm(tempPoly.terms[i]);
+	}
+	
+	resultPoly.simplify();
+	return resultPoly;
+}
+
+Polynomial Polynomial::operator*(const Polynomial& right) const
+{
+	Polynomial resultPoly;
+	for (int i = 0; i < numberOfTerms; i++)
+		for (int j = 0; j < right.numberOfTerms; j++)
+			resultPoly.addTerm(terms[i] * right.terms[j]);
+	resultPoly.simplify();
+	return resultPoly;
+}
+
+const Polynomial& Polynomial::operator=(const Polynomial& right)
+{
+	if (*this != right)
+	{
+		delete[] terms;
+		terms = nullptr;
+		numberOfTerms = right.numberOfTerms;
+		terms = new Term[numberOfTerms];
+		for (int i = 0; i < numberOfTerms; i++)
+			terms[i] = right.terms[i];
+	}
+	return *this;
+}
+
+bool Polynomial::operator==(const Polynomial& right) const
+{
+	bool equality = true;
+	Polynomial leftCopy(*this);
+	Polynomial rightCopy(right);
+	leftCopy.simplify();
+	rightCopy.simplify();
+	if (leftCopy.numberOfTerms != rightCopy.numberOfTerms)
+		equality = false;
+	else
+	{
+		for (int i = 0; i < leftCopy.numberOfTerms; i++)
+			if (leftCopy.terms[i] != rightCopy.terms[i])
+				equality = false;
+	}
+	return equality;
 }
 
 ostream& operator<<(ostream& strm, const Polynomial& right)
 {
-	
+	for (int i = 0; i < right.numberOfTerms; i++)
+	{
+		if (i > 0 && right.terms[i].getCoefficient() > 0)
+			strm << " + ";
+		else if (right.terms[i].getCoefficient() < 0)
+			strm << " - ";
+		strm << right.terms[i];
+	}
+	return strm;
 }

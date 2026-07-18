@@ -24,11 +24,20 @@ public:
 	void setTerms(Term* newTerms, int size);
 	void setTerm(int index, Term newTerm);
 
-	Polynomial operator+(const Polynomial& right);
-	Polynomial operator-(const Polynomial& right);
-	Polynomial operator*(const Polynomial& right);
-	bool operator==(const Polynomial& right);
-	friend ostream& operator<<(ostream& strm, const Polynomial& right);
+	void addTerm(Term term); // working
+	void removeTerm(int index); // working
+	void swapTerms(int firstIndex, int secondIndex); // working
+	void simplify(); // working
+	void sort(); // working
+
+	operator Term();
+
+	Polynomial operator+(const Polynomial& right) const; // working
+	Polynomial operator-(const Polynomial& right) const; // working
+	Polynomial operator*(const Polynomial& right) const; // working
+	const Polynomial& operator=(const Polynomial& right); // working
+	bool operator==(const Polynomial& right) const; // working
+	friend ostream& operator<<(ostream& strm, const Polynomial& right); // working
 };
 
 #endif
