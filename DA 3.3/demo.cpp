@@ -18,6 +18,7 @@ int main()
 	testTimeRelationalOperators();
 	testTimeOutStreamOperator();
 	testTimeIntegerConversion();
+	Time::stopwatch(Time(0, 0, 1, 30));
 }
 
 void testTimeAddition()

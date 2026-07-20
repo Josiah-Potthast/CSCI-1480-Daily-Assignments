@@ -1,5 +1,7 @@
 #ifndef TIME_H
 #define TIME_H
+#include <chrono>
+#include <thread>
 #include <iostream>
 using namespace std;
 
@@ -33,6 +35,10 @@ public:
 
 	void simplify();
 
+	static void stopwatch(Time runtime);
+	
+	Time operator++();
+	Time operator++(int);
 	Time& operator=(const Time& right);
 	Time operator+(const Time& right) const;
 	Time operator-(const Time& right) const;

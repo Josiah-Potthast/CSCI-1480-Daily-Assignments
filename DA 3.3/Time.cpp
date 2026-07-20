@@ -127,6 +127,31 @@ void Time::simplify()
 	}
 }
 
+void Time::stopwatch(Time runtime)
+{
+	Time timer;
+	while (timer <= runtime)
+	{
+		cout << timer++ << endl;
+		this_thread::sleep_for(1000ms);
+	}
+}
+
+Time Time::operator++()
+{
+	seconds++;
+	this->simplify();
+	return *this;
+}
+
+Time Time::operator++(int)
+{
+	Time temp = *this;
+	seconds++;
+	this->simplify();
+	return temp;
+}
+
 Time& Time::operator=(const Time& right)
 {
 	if (this != &right)
