@@ -39,6 +39,8 @@ public:
 	
 	Time operator++();
 	Time operator++(int);
+	Time operator--();
+	Time operator--(int);
 	Time& operator=(const Time& right);
 	Time operator+(const Time& right) const;
 	Time operator-(const Time& right) const;

@@ -152,6 +152,21 @@ Time Time::operator++(int)
 	return temp;
 }
 
+Time Time::operator--()
+{
+	seconds--;
+	this->simplify();
+	return *this;
+}
+
+Time Time::operator--(int)
+{
+	Time temp = *this;
+	seconds--;
+	this->simplify();
+	return temp;
+}
+
 Time& Time::operator=(const Time& right)
 {
 	if (this != &right)
