@@ -9,6 +9,7 @@ private:
 	int red;
 	int green;
 	int blue;
+	static bool printLetters;
 public:
 	Color();
 	Color(int red, int green, int blue);
@@ -16,6 +17,8 @@ public:
 
 	Color& operator=(const Color& right);
 	friend ostream& operator<<(ostream& strm, const Color& obj);
+
+	static void setPrintLetters(bool mode);
 };
 
 static const Color

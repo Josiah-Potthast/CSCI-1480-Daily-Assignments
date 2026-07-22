@@ -86,7 +86,17 @@ ostream& operator<<(ostream& strm, const Color& obj)
 	else
 		letter = 'X'; // an error, should never show up
 
-	strm << letter;
+	if (obj.printLetters)
+		strm << letter << " ";
+	else
+		strm << "  ";
 	strm << "\033[0m";
 	return strm;
+}
+
+bool Color::printLetters = true;
+
+void Color::setPrintLetters(bool mode)
+{
+	printLetters = mode;
 }

@@ -8,12 +8,13 @@ using namespace std;
 
 void movieDriver();
 void colorDriver();
+void pictureDriver();
 
 int main()
 {
 	movieDriver();
 	colorDriver();
-	cout << endl << CREEPER << endl;
+	pictureDriver();
 }
 
 void movieDriver()
@@ -48,4 +49,10 @@ void colorDriver()
 	cout << BLACK << endl;
 	cout << WHITE << endl;
 	cout << GRAY << endl;
+}
+
+void pictureDriver()
+{
+	Color::setPrintLetters(false);
+	cout << endl << CREEPER << endl;
 }

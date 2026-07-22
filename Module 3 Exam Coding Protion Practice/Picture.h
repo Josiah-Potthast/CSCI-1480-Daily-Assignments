@@ -11,11 +11,10 @@ class Picture
 {
 private:
 	vector<vector<Color>> pixels;
-	string defaultANSI; // the color of the spaces printed between Colors
 public:
 	Picture();
-	Picture(int width, int hight, string defaultANSI = "\033[40m");
-	Picture(vector<vector<Color>> pixels, string defaultANSI = "\033[40m");
+	Picture(int width, int hight);
+	Picture(vector<vector<Color>> pixels);
 	Picture(const Picture& obj);
 	~Picture();
 
@@ -23,7 +22,6 @@ public:
 	int getHight() const;
 	Color getPixel(int x, int y);
 	void setPixel(int x, int y, Color c);
-	void setDefaultANSI(string code);
 
 	Picture& operator=(const Picture& right);
 	friend ostream& operator<<(ostream& strm, const Picture& obj);
